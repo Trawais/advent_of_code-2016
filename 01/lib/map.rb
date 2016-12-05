@@ -11,6 +11,7 @@ class Map
     @y_coord = 0
     @heading_to = NORTH
     @instructions = instructions
+    @visited = [[@x_coord, @y_coord]]
   end
 
   def shortest_path
@@ -26,6 +27,15 @@ class Map
     end
   end
 
+  def execute_instructions_second_part
+    @instructions.split(', ').each do |command|
+      _, turn_to, blocks = /([LR])(\d+)/.match(command).to_a.flatten
+      execute_turn(turn_to)
+      break if execute_walk_second_part(blocks)
+      # puts "heading to: #{@heading_to}, x: #{@x_coord}, y: #{@y_coord}"
+    end
+  end
+
   def execute_walk(blocks)
     blocks_count = blocks.to_i
     case @heading_to
@@ -38,6 +48,19 @@ class Map
     when WEST
       @x_coord -= blocks_count
     end
+  end
+
+  def execute_walk_second_part(blocks)
+    (1..blocks.to_i).each do
+      execute_walk(1)
+      return true if already_on_visited?
+      @visited << [@x_coord, @y_coord]
+    end
+    return false
+  end
+
+  def already_on_visited?
+    return @visited.include?([@x_coord, @y_coord])
   end
 
   def execute_turn(direction)
