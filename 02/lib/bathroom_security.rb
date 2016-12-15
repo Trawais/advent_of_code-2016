@@ -1,33 +1,54 @@
 class BathroomSecurity
   KEY_PAD = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
+    ['#', '#', '#', '#', '#'],
+    ['#', '1', '2', '3', '#'],
+    ['#', '4', '5', '6', '#'],
+    ['#', '7', '8', '9', '#'],
+    ['#', '#', '#', '#', '#']
   ]
 
-  def initialize()
-    @current = {row: 1, col: 1}
+  ACTUAL_KEY_PAD = [
+    ['#', '#', '#', '#', '#', '#', '#'],
+    ['#', '#', '#', '1', '#', '#', '#'],
+    ['#', '#', '2', '3', '4', '#', '#'],
+    ['#', '5', '6', '7', '8', '9', '#'],
+    ['#', '#', 'A', 'B', 'C', '#', '#'],
+    ['#', '#', '#', 'D', '#', '#', '#'],
+    ['#', '#', '#', '#', '#', '#', '#']
+  ]
+
+  def initialize(row, col, second_part = false)
+    @current = {row: row, col: col}
     @result = []
+    @second_part = second_part
   end
 
-  def get_current_number
-    KEY_PAD[@current[:row]][@current[:col]]
+  def get_current_number(row: @current[:row], col: @current[:col])
+    if @second_part
+      ACTUAL_KEY_PAD[row][col]
+    else
+      KEY_PAD[row][col]
+    end
   end
 
   def move_up
-    @current[:row] = [@current[:row] - 1, 0].max
+    new_row = @current[:row] - 1
+    @current[:row] = new_row unless get_current_number(row: new_row) == '#'
   end
 
   def move_down
-    @current[:row] = [@current[:row] + 1, 2].min
+    new_row = @current[:row] + 1
+    @current[:row] = new_row unless get_current_number(row: new_row) == '#'
   end
 
   def move_left
-    @current[:col] = [@current[:col] - 1, 0].max
+    new_col = @current[:col] - 1
+    @current[:col] = new_col unless get_current_number(col: new_col) == '#'
   end
 
   def move_right
-    @current[:col] = [@current[:col] + 1, 2].min
+    new_col = @current[:col] + 1
+    @current[:col] = new_col unless get_current_number(col: new_col) == '#'
   end
 
   def get_code
