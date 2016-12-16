@@ -22,8 +22,8 @@ class Map
     @instructions.split(', ').each do |command|
       _, turn_to, blocks = /([LR])(\d+)/.match(command).to_a.flatten
       execute_turn(turn_to)
-      execute_walk(blocks)
-      #puts "heading to: #{@heading_to}, x: #{@x_coord}, y: #{@y_coord}"
+      execute_walk(blocks.to_i)
+      # puts "heading to: #{@heading_to}, x: #{@x_coord}, y: #{@y_coord}"
     end
   end
 
@@ -37,16 +37,15 @@ class Map
   end
 
   def execute_walk(blocks)
-    blocks_count = blocks.to_i
     case @heading_to
     when NORTH
-      @y_coord += blocks_count
+      @y_coord += blocks
     when EAST
-      @x_coord += blocks_count
+      @x_coord += blocks
     when SOUTH
-      @y_coord -= blocks_count
+      @y_coord -= blocks
     when WEST
-      @x_coord -= blocks_count
+      @x_coord -= blocks
     end
   end
 
@@ -56,11 +55,11 @@ class Map
       return true if already_on_visited?
       @visited << [@x_coord, @y_coord]
     end
-    return false
+    false
   end
 
   def already_on_visited?
-    return @visited.include?([@x_coord, @y_coord])
+    @visited.include?([@x_coord, @y_coord])
   end
 
   def execute_turn(direction)

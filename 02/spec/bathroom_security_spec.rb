@@ -33,13 +33,13 @@ RSpec.describe BathroomSecurity do
     it 'passes given example' do
       input = File.read('example.txt')
       @bath_sec.execute_instructions(input)
-      expect(@bath_sec.get_code).to eq '1985'
+      expect(@bath_sec.code).to eq '1985'
     end
 
     it 'passes' do
       input = File.read('input.txt')
       @bath_sec.execute_instructions(input)
-      expect(@bath_sec.get_code).to eq '12578'
+      expect(@bath_sec.code).to eq '12578'
     end
   end
 
@@ -55,13 +55,13 @@ RSpec.describe BathroomSecurity do
     it 'passes given example' do
       input = File.read('example.txt')
       @bath_sec.execute_instructions(input)
-      expect(@bath_sec.get_code).to eq '5DB3'
+      expect(@bath_sec.code).to eq '5DB3'
     end
 
     it 'passes' do
       input = File.read('input.txt')
       @bath_sec.execute_instructions(input)
-      expect(@bath_sec.get_code).to eq '516DD'
+      expect(@bath_sec.code).to eq '516DD'
     end
   end
 end

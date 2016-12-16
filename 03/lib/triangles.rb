@@ -1,9 +1,10 @@
+# class for solvin third day of advent_of_code_2016
 class Triangles
   def initialize(input)
-    @lines = input.each_line
+    @lines = input.each_line.to_a.map(&:split)
   end
 
-  def get_valids
+  def count_triangles
     result = 0
     @lines.each do |line|
       result += 1 if triangle?(line)
@@ -11,13 +12,18 @@ class Triangles
     result
   end
 
-  def triangle?(triple)
-    all_vars = 0
-    triple.split.permutation.to_a.each do |variation|
-      if variation[0].to_i + variation[1].to_i > variation[2].to_i
-        all_vars += 1
-      end
+  def triangle?(sides)
+    sorted = sides.map(&:to_i).sort
+    sorted[0] + sorted[1] > sorted[2] ? true : false
+  end
+
+  def invert_lines_for_second_part!
+    new_lines = []
+    loop do
+      break if @lines.empty?
+      three_rows = @lines.shift(3)
+      new_lines += three_rows.transpose
     end
-    return all_vars == 6 ? true : false
+    @lines = new_lines
   end
 end

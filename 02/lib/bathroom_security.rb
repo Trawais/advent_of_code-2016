@@ -1,3 +1,4 @@
+# class for solving second day of advent_of_code_2016
 class BathroomSecurity
   KEY_PAD = [
     ['#', '#', '#', '#', '#'],
@@ -5,7 +6,7 @@ class BathroomSecurity
     ['#', '4', '5', '6', '#'],
     ['#', '7', '8', '9', '#'],
     ['#', '#', '#', '#', '#']
-  ]
+  ].freeze
 
   ACTUAL_KEY_PAD = [
     ['#', '#', '#', '#', '#', '#', '#'],
@@ -15,10 +16,10 @@ class BathroomSecurity
     ['#', '#', 'A', 'B', 'C', '#', '#'],
     ['#', '#', '#', 'D', '#', '#', '#'],
     ['#', '#', '#', '#', '#', '#', '#']
-  ]
+  ].freeze
 
   def initialize(row, col, second_part = false)
-    @current = {row: row, col: col}
+    @current = { row: row, col: col }
     @result = []
     @second_part = second_part
   end
@@ -51,7 +52,7 @@ class BathroomSecurity
     @current[:col] = new_col unless get_current_number(col: new_col) == '#'
   end
 
-  def get_code
+  def code
     @result.join
   end
 
