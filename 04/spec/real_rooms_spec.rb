@@ -30,13 +30,28 @@ RSpec.describe RealRooms do
     it 'passes given examples' do
       input = File.read('example.txt')
       real_rooms = RealRooms.new(input)
-      expect(real_rooms.sum_ids).to eq 1514
+      expect(real_rooms.sum_ids).to eq 1_514
     end
 
     it 'passes on given input' do
       input = File.read('input.txt')
       real_rooms = RealRooms.new(input)
-      expect(real_rooms.sum_ids).to eq 361724
+      expect(real_rooms.sum_ids).to eq 361_724
+    end
+  end
+
+  context 'second part' do
+    it 'decrypt name properly' do
+      real_rooms = RealRooms.new('')
+      expect(real_rooms.decrypt_name('abc-def-ghi', 1)).to eq 'bcd efg hij'
+      expect(real_rooms.decrypt_name('x-y-z', 3)).to eq 'a b c'
+      expect(real_rooms.decrypt_name('qzmt-zixmtkozy-ivhz', 343)).to eq 'very encrypted name'
+    end
+
+    it 'finds where "North Pole" is' do
+      input = File.read('input.txt')
+      real_rooms = RealRooms.new(input)
+      expect(real_rooms.find_north_pole).to eq 482
     end
   end
 end

@@ -1,3 +1,4 @@
 AllCops:
   Excludes:
     - '**/spec_helper.rb'
+    - '**/*spec.rb'
