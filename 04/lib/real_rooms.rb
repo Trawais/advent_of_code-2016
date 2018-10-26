@@ -25,7 +25,7 @@ class RealRooms
                                  .take(5)
                                  .map { |k, _v| k }
                                  .join
-    computed_hash_code == hash_code ? true : false
+    computed_hash_code == hash_code
   end
 
   def find_north_pole

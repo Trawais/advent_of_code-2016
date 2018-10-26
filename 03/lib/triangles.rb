@@ -14,13 +14,14 @@ class Triangles
 
   def triangle?(sides)
     sorted = sides.map(&:to_i).sort
-    sorted[0] + sorted[1] > sorted[2] ? true : false
+    sorted[0] + sorted[1] > sorted[2]
   end
 
   def invert_lines_for_second_part!
     new_lines = []
     loop do
       break if @lines.empty?
+
       three_rows = @lines.shift(3)
       new_lines += three_rows.transpose
     end

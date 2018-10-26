@@ -53,6 +53,7 @@ class Map
     (1..blocks.to_i).each do
       execute_walk(1)
       return true if already_on_visited?
+
       @visited << [@x_coord, @y_coord]
     end
     false
